@@ -1,0 +1,293 @@
+{% extends "base.html" %} {% block title %} RESTEL - Book Restaurants & Hotels
+{% endblock %} {% block home_content %}
+<!-- Home Section - Hero Layout -->
+<div class="min-h-[calc(100vh-4rem)] flex items-center">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="flex flex-col lg:flex-row items-center gap-12">
+      <!-- Left Side - Text Content -->
+      <div class="lg:w-1/2 text-center lg:text-left">
+        <h1
+          class="text-4xl md:text-5xl lg:text-6xl font-bold text-amber-800 mb-6 leading-tight"
+        >
+          Book Hotels & Restaurants<br />
+          <span class="text-amber-600">Early !!</span>
+        </h1>
+
+        <p class="text-lg md:text-xl text-gray-700 mb-8 leading-relaxed">
+          We bring you not only name, but also proper bookings for any
+          restaurant or hotel you want!
+        </p>
+
+        <div
+          class="bg-amber-100 bg-opacity-50 rounded-lg p-6 mb-8 border-l-4 border-amber-500"
+        >
+          <p class="text-gray-700 italic leading-relaxed">
+            "Can be a small Birthday Party, any large wedding Destination
+            Bookings, a special Date with your special ones and even small
+            friendly gatherings...<br />
+            <span class="font-semibold text-amber-700">All in ONE !</span>"
+          </p>
+        </div>
+
+        <!-- Optional Call to Action Button -->
+        <div class="flex justify-center lg:justify-start space-x-4">
+          <a
+            href="#"
+            class="bg-amber-600 hover:bg-amber-700 text-white px-8 py-3 rounded-lg font-semibold transition-colors shadow-md"
+          >
+            Start Booking
+          </a>
+          <a
+            href="#"
+            class="border-2 border-amber-600 text-amber-600 hover:bg-amber-50 px-8 py-3 rounded-lg font-semibold transition-colors"
+          >
+            Learn More
+          </a>
+        </div>
+      </div>
+
+      <!-- Right Side - Image with Faded Effect -->
+      <div class="lg:w-1/2 relative">
+        <div class="relative rounded-2xl overflow-hidden shadow-2xl">
+          <!-- Main Image -->
+          <img
+            src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800&h=600&fit=crop"
+            alt="Luxury Restaurant and Hotel"
+            class="w-full h-auto object-cover"
+          />
+
+          <!-- Faded Overlay Effect -->
+          <div
+            class="absolute inset-0 bg-gradient-to-t from-amber-900/40 to-amber-800/20"
+          ></div>
+
+          <!-- Optional: Decorative Element -->
+          <div
+            class="absolute bottom-4 left-4 right-4 bg-white/90 backdrop-blur-sm rounded-lg p-3"
+          >
+            <p class="text-amber-800 text-sm font-semibold text-center">
+              ✨ Premium Venues Available ✨
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %} {% block explore_content %}
+<!-- Explore Section - Search and Results -->
+<div class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+  <!-- Page Title -->
+  <div class="text-center mb-8">
+    <h1 class="text-3xl md:text-4xl font-bold text-amber-800 mb-2">
+      Find Your Perfect Venue
+    </h1>
+    <p class="text-gray-600">Discover restaurants, hotels, and event spaces</p>
+  </div>
+
+  <!-- Search Box -->
+  <div class="bg-white rounded-xl shadow-lg p-6 mb-10">
+    <div class="flex flex-col lg:flex-row gap-4 items-center">
+      <!-- Location Field -->
+      <div class="flex-1 w-full">
+        <label class="block text-sm font-medium text-gray-700 mb-2">
+          <i class="fas fa-map-marker-alt text-amber-600 mr-1"></i> Location
+        </label>
+        <div class="relative">
+          <div
+            class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"
+          >
+            <i class="fas fa-search text-gray-400"></i>
+          </div>
+          <input
+            type="text"
+            placeholder="Search by city, area, or zip code..."
+            class="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent"
+          />
+        </div>
+      </div>
+
+      <!-- Type Dropdown -->
+      <div class="flex-1 w-full">
+        <label class="block text-sm font-medium text-gray-700 mb-2">
+          <i class="fas fa-tag text-amber-600 mr-1"></i> Type
+        </label>
+        <div class="relative">
+          <select
+            class="block w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent appearance-none bg-white"
+          >
+            <option value="">All Types</option>
+            <option value="restaurant">Restaurants</option>
+            <option value="hotel">Hotels</option>
+            <option value="event">Event Spaces</option>
+            <option value="cafe">Cafes & Lounges</option>
+            <option value="wedding">Wedding Venues</option>
+          </select>
+          <div
+            class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none"
+          ></div>
+        </div>
+      </div>
+
+      <!-- Search Button -->
+      <div class="lg:w-auto w-full mt-6 lg">
+        <button
+          class="w-full lg:w-auto bg-amber-600 hover:bg-amber-700 text-white px-8 py-2 rounded-lg font-semibold transition-colors shadow-md flex items-center justify-center gap-2"
+        >
+          <i class="fas fa-search"></i>
+          Search
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Results Section (Placeholder - Will be populated with actual results) -->
+  <div class="mt-8">
+    <h2 class="text-xl font-semibold text-gray-800 mb-4">
+      Recommended for You
+    </h2>
+
+    <!-- Results Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <!-- Restaurant Card 1 -->
+      <div
+        class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow"
+      >
+        <img
+          src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=400&h=250&fit=crop"
+          alt="Restaurant interior with dining tables"
+          class="w-full h-48 object-cover"
+        />
+        <div class="p-4">
+          <div class="flex items-center justify-between mb-2">
+            <h3 class="text-lg font-bold text-gray-800">
+              The Grand Restaurant
+            </h3>
+            <span
+              class="bg-amber-100 text-amber-700 text-xs px-2 py-1 rounded font-semibold"
+              >Restaurant</span
+            >
+          </div>
+          <p class="text-gray-600 text-sm mb-2">
+            <i class="fas fa-map-marker-alt text-amber-600 mr-1"></i> Downtown,
+            City Center
+          </p>
+          <p class="text-gray-600 text-sm mb-3">
+            Fine dining experience with international cuisine
+          </p>
+          <div class="flex items-center justify-between">
+            <div class="flex items-center">
+              <i class="fas fa-star text-yellow-400 text-sm"></i>
+              <i class="fas fa-star text-yellow-400 text-sm"></i>
+              <i class="fas fa-star text-yellow-400 text-sm"></i>
+              <i class="fas fa-star text-yellow-400 text-sm"></i>
+              <i class="fas fa-star-half-alt text-yellow-400 text-sm"></i>
+              <span class="text-gray-600 text-sm ml-1">(4.5)</span>
+            </div>
+            <a
+              href="#"
+              class="text-amber-600 hover:text-amber-700 text-sm font-semibold"
+              >Book Now →</a
+            >
+          </div>
+        </div>
+      </div>
+
+      <!-- Hotel Card 2 -->
+      <div
+        class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow"
+      >
+        <img
+          src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400&h=250&fit=crop"
+          alt="Luxury hotel lobby and reception"
+          class="w-full h-48 object-cover"
+        />
+        <div class="p-4">
+          <div class="flex items-center justify-between mb-2">
+            <h3 class="text-lg font-bold text-gray-800">Luxury Palace Hotel</h3>
+            <span
+              class="bg-blue-100 text-blue-700 text-xs px-2 py-1 rounded font-semibold"
+              >Hotel</span
+            >
+          </div>
+          <p class="text-gray-600 text-sm mb-2">
+            <i class="fas fa-map-marker-alt text-amber-600 mr-1"></i> Beach
+            Road, Seaside
+          </p>
+          <p class="text-gray-600 text-sm mb-3">
+            5-star luxury with ocean views and premium amenities
+          </p>
+          <div class="flex items-center justify-between">
+            <div class="flex items-center">
+              <i class="fas fa-star text-yellow-400 text-sm"></i>
+              <i class="fas fa-star text-yellow-400 text-sm"></i>
+              <i class="fas fa-star text-yellow-400 text-sm"></i>
+              <i class="fas fa-star text-yellow-400 text-sm"></i>
+              <i class="fas fa-star text-yellow-400 text-sm"></i>
+              <span class="text-gray-600 text-sm ml-1">(5.0)</span>
+            </div>
+            <a
+              href="#"
+              class="text-amber-600 hover:text-amber-700 text-sm font-semibold"
+              >Book Now →</a
+            >
+          </div>
+        </div>
+      </div>
+
+      <!-- Event Space Card 3 (Fixed Image) -->
+      <div
+        class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow"
+      >
+        <img
+          src="https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=400&h=250&fit=crop"
+          alt="Elegant banquet hall for weddings and events"
+          class="w-full h-48 object-cover"
+        />
+        <div class="p-4">
+          <div class="flex items-center justify-between mb-2">
+            <h3 class="text-lg font-bold text-gray-800">Royal Banquet Hall</h3>
+            <span
+              class="bg-purple-100 text-purple-700 text-xs px-2 py-1 rounded font-semibold"
+              >Event Space</span
+            >
+          </div>
+          <p class="text-gray-600 text-sm mb-2">
+            <i class="fas fa-map-marker-alt text-amber-600 mr-1"></i> Convention
+            Center District
+          </p>
+          <p class="text-gray-600 text-sm mb-3">
+            Perfect for weddings, conferences, and large gatherings up to 500
+            guests
+          </p>
+          <div class="flex items-center justify-between">
+            <div class="flex items-center">
+              <i class="fas fa-star text-yellow-400 text-sm"></i>
+              <i class="fas fa-star text-yellow-400 text-sm"></i>
+              <i class="fas fa-star text-yellow-400 text-sm"></i>
+              <i class="fas fa-star text-yellow-400 text-sm"></i>
+              <i class="fas fa-star text-gray-300 text-sm"></i>
+              <span class="text-gray-600 text-sm ml-1">(4.2)</span>
+            </div>
+            <a
+              href="#"
+              class="text-amber-600 hover:text-amber-700 text-sm font-semibold"
+              >Book Now →</a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- View All Button -->
+    <div class="text-center mt-8">
+      <a
+        href="#"
+        class="inline-block border-2 border-amber-600 text-amber-600 hover:bg-amber-50 px-6 py-2 rounded-lg font-semibold transition-colors"
+      >
+        View All Venues →
+      </a>
+    </div>
+  </div>
+</div>
+{% endblock %}
