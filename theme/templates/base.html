@@ -1,347 +1,211 @@
 {% load static tailwind_tags %}
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>
-      {% block title %}RESTEL - Restaurant & Hotel Booking{% endblock %}
-    </title>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}RESTEL - Restaurant & Hotel Booking{% endblock %}</title>
     {% tailwind_css %}
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
-    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-      /* Active sidebar link styling */
-      .sidebar-link.active {
-        background-color: #b45309; /* amber-700 */
-        border-left: 4px solid #fbbf24; /* amber-300 */
-      }
-
-      /* Content sections - only one visible at a time */
-      .content-section {
-        display: none;
-      }
-
-      .content-section.active {
-        display: block;
-      }
-
-      /* Smooth transitions */
-      .sidebar-link {
-        transition: all 0.2s ease;
-      }
-
-      /* Make sure footer stays at bottom */
-      .main-content-wrapper {
-        display: flex;
-        flex-direction: column;
-        height: 100%;
-      }
-
-      .content-area {
-        flex: 1;
-      }
+        .sidebar-link.active {
+            background-color: #b45309;
+            border-left: 4px solid #fbbf24;
+        }
+        .content-section {
+            display: none;
+        }
+        .content-section.active {
+            display: block;
+        }
+        .sidebar-link {
+            transition: all 0.2s ease;
+        }
+        .main-content-wrapper {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        .content-area {
+            flex: 1;
+        }
     </style>
     {% block extra_css %}{% endblock %}
-  </head>
-  <body class="bg-amber-50 font-sans antialiased">
-    <!-- Main Container with Sidebar + Content -->
+</head>
+<body class="bg-amber-50 font-sans antialiased">
+    
     <div class="flex h-screen">
-      <!-- Sidebar (Permanent - Always Visible) -->
-      <aside class="w-64 bg-amber-800 shadow-xl flex flex-col">
-        <!-- Sidebar Header with Logo (Only RESTEL logo) -->
-        <div class="p-4 border-b border-amber-700">
-          <div class="flex items-center space-x-2">
-            <i class="fas fa-utensils text-amber-200 text-xl"></i>
-            <span class="text-amber-100 font-bold text-lg">RESTEL</span>
-          </div>
-        </div>
-
-        <!-- Sidebar Navigation Links -->
-        <nav class="flex-1 py-4">
-          <!-- Home Section Link -->
-          <a
-            href="#"
-            data-section="home"
-            class="sidebar-link flex items-center space-x-3 px-4 py-3 text-amber-100 hover:bg-amber-700 transition-colors"
-          >
-            <i class="fas fa-home text-xl w-6"></i>
-            <span class="text-base font-medium">Home</span>
-          </a>
-
-          <!-- Explore Section Link -->
-          <a
-            href="#"
-            data-section="explore"
-            class="sidebar-link flex items-center space-x-3 px-4 py-3 text-amber-100 hover:bg-amber-700 transition-colors"
-          >
-            <i class="fas fa-search text-xl w-6"></i>
-            <span class="text-base font-medium">Explore</span>
-          </a>
-        </nav>
-
-        <!-- Sidebar Footer (Simple) -->
-        <div class="p-4 border-t border-amber-700">
-          <div class="text-amber-300 text-xs text-center">
-            <p>© {% now "Y" %} RESTEL</p>
-          </div>
-        </div>
-      </aside>
-
-      <!-- Main Content Area -->
-      <div class="flex-1 flex flex-col overflow-hidden">
-        <!-- Navbar (Only Auth Buttons - Pushed to Right) -->
-        <nav class="bg-amber-800 shadow-lg sticky top-0 z-40">
-          <div class="px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-end items-center h-16">
-              <!-- Right side: Login and Signup buttons -->
-              <div class="flex items-center space-x-4">
-                <a
-                  href="#"
-                  class="text-amber-100 hover:text-amber-200 px-3 py-2 rounded-md text-sm font-medium transition-colors"
-                >
-                  <i class="fas fa-sign-in-alt mr-1"></i> Login
-                </a>
-                <a
-                  href="#"
-                  class="bg-amber-600 hover:bg-amber-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors shadow-md"
-                >
-                  <i class="fas fa-user-plus mr-1"></i> Sign Up
-                </a>
-              </div>
-            </div>
-          </div>
-        </nav>
-
-        <!-- Scrollable Main Content with Footer -->
-        <div class="flex-1 overflow-y-auto">
-          <div class="main-content-wrapper">
-            <!-- Dynamic Content Sections -->
-            <div class="content-area">
-              <!-- Home Section Content (visible by default) -->
-              <div id="home-section" class="content-section active">
-                {% block home_content %}
-                <!-- Default home content - child templates can override this -->
-                <div class="container mx-auto px-4 py-8">
-                  <div class="text-center">
-                    <h1 class="text-4xl font-bold text-amber-800 mb-4">
-                      Welcome to RESTEL
-                    </h1>
-                    <p class="text-xl text-gray-600">
-                      Your restaurant and hotel booking platform
-                    </p>
-                  </div>
+        
+        <!-- Sidebar Block -->
+        {% block sidebar %}
+        <aside class="w-64 bg-amber-800 shadow-xl flex flex-col">
+            <div class="p-4 border-b border-amber-700">
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-utensils text-amber-200 text-xl"></i>
+                    <span class="text-amber-100 font-bold text-lg">RESTEL</span>
                 </div>
-                {% endblock %}
-              </div>
-
-              <!-- Explore Section Content (hidden by default) -->
-              <div id="explore-section" class="content-section">
-                {% block explore_content %}
-                <!-- Default explore content - child templates can override this -->
-                <div class="container mx-auto px-4 py-8">
-                  <div class="text-center">
-                    <h1 class="text-4xl font-bold text-amber-800 mb-4">
-                      Explore
-                    </h1>
-                    <p class="text-xl text-gray-600">
-                      Discover restaurants, hotels, and events
-                    </p>
-                  </div>
-                </div>
-                {% endblock %}
-              </div>
-
-              <!-- Allow child templates to add more content sections if needed -->
-              {% block additional_sections %}{% endblock %}
             </div>
-
-            <!-- Footer -->
-            <footer class="bg-amber-900 text-amber-100 mt-auto">
-              <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
-                <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-                  <!-- About/Company Info -->
-                  <div>
-                    <h3 class="text-lg font-bold mb-4">About RESTEL</h3>
-                    <p class="text-amber-200 text-sm">
-                      Your perfect destination for restaurant and hotel
-                      bookings. From small tables to grand events.
-                    </p>
-                  </div>
-
-                  <!-- Quick Links -->
-                  <div>
-                    <h3 class="text-lg font-bold mb-4">Quick Links</h3>
-                    <ul class="space-y-2 text-sm">
-                      <li>
-                        <a
-                          href="#"
-                          class="text-amber-200 hover:text-amber-100 transition-colors"
-                          >About Us</a
-                        >
-                      </li>
-                      <li>
-                        <a
-                          href="#"
-                          class="text-amber-200 hover:text-amber-100 transition-colors"
-                          >Terms & Conditions</a
-                        >
-                      </li>
-                      <li>
-                        <a
-                          href="#"
-                          class="text-amber-200 hover:text-amber-100 transition-colors"
-                          >Privacy Policy</a
-                        >
-                      </li>
-                      <li>
-                        <a
-                          href="#"
-                          class="text-amber-200 hover:text-amber-100 transition-colors"
-                          >FAQs</a
-                        >
-                      </li>
-                    </ul>
-                  </div>
-
-                  <!-- Contact Info -->
-                  <div>
-                    <h3 class="text-lg font-bold mb-4">Contact Us</h3>
-                    <ul class="space-y-2 text-sm text-amber-200">
-                      <li><i class="fas fa-phone mr-2"></i> +1 234 567 890</li>
-                      <li>
-                        <i class="fas fa-envelope mr-2"></i> info@restel.com
-                      </li>
-                      <li>
-                        <i class="fas fa-map-marker-alt mr-2"></i> 123 Main
-                        Street, City
-                      </li>
-                    </ul>
-                  </div>
-
-                  <!-- Social Media -->
-                  <div>
-                    <h3 class="text-lg font-bold mb-4">Follow Us</h3>
-                    <div class="flex space-x-4">
-                      <a
-                        href="#"
-                        class="text-amber-200 hover:text-amber-100 transition-colors text-xl"
-                      >
-                        <i class="fab fa-facebook"></i>
-                      </a>
-                      <a
-                        href="#"
-                        class="text-amber-200 hover:text-amber-100 transition-colors text-xl"
-                      >
-                        <i class="fab fa-instagram"></i>
-                      </a>
-                      <a
-                        href="#"
-                        class="text-amber-200 hover:text-amber-100 transition-colors text-xl"
-                      >
-                        <i class="fab fa-twitter"></i>
-                      </a>
-                      <a
-                        href="#"
-                        class="text-amber-200 hover:text-amber-100 transition-colors text-xl"
-                      >
-                        <i class="fab fa-linkedin"></i>
-                      </a>
+            
+            <nav class="flex-1 py-4">
+                <a href="#" data-section="home" class="sidebar-link flex items-center space-x-3 px-4 py-3 text-amber-100 hover:bg-amber-700 transition-colors">
+                    <i class="fas fa-home text-xl w-6"></i>
+                    <span class="text-base font-medium">Home</span>
+                </a>
+                <a href="#" data-section="explore" class="sidebar-link flex items-center space-x-3 px-4 py-3 text-amber-100 hover:bg-amber-700 transition-colors">
+                    <i class="fas fa-search text-xl w-6"></i>
+                    <span class="text-base font-medium">Explore</span>
+                </a>
+            </nav>
+            
+            <div class="p-4 border-t border-amber-700">
+                <div class="text-amber-300 text-xs text-center">
+                    <p>© {% now "Y" %} RESTEL</p>
+                </div>
+            </div>
+        </aside>
+        {% endblock %}
+        
+        <!-- Main Content Area -->
+        <div class="flex-1 flex flex-col overflow-hidden">
+            
+            <!-- Navbar Block -->
+            {% block navbar %}
+            <nav class="bg-amber-800 shadow-lg sticky top-0 z-40">
+                <div class="px-4 sm:px-6 lg:px-8">
+                    <div class="flex justify-end items-center h-16">
+                        <div class="flex items-center space-x-4">
+                            <a href="{% url 'login' %}" class="text-amber-100 hover:text-amber-200 px-3 py-2 rounded-md text-sm font-medium transition-colors">
+                                <i class="fas fa-sign-in-alt mr-1"></i> Login
+                            </a>
+                            <a href="{% url 'register' %}" class="bg-amber-600 hover:bg-amber-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors shadow-md">
+                                <i class="fas fa-user-plus mr-1"></i> Register
+                            </a>
+                        </div>
                     </div>
-                  </div>
                 </div>
-                <div
-                  class="border-t border-amber-800 mt-8 pt-6 text-center text-sm text-amber-200"
-                >
-                  <p>&copy; {% now "Y" %} RESTEL. All rights reserved.</p>
+            </nav>
+            {% endblock %}
+            
+            <!-- Main Content Block -->
+            <div class="flex-1 overflow-y-auto">
+                <div class="main-content-wrapper">
+                    <div class="content-area">
+                        <!-- Home Section - Container always exists, content is block -->
+                        <div id="home-section" class="content-section active">
+                            {% block home_content %}
+                            <div class="container mx-auto px-4 py-8">
+                                <div class="text-center">
+                                    <h1 class="text-4xl font-bold text-amber-800 mb-4">Welcome to RESTEL</h1>
+                                    <p class="text-xl text-gray-600">Your restaurant and hotel booking platform</p>
+                                </div>
+                            </div>
+                            {% endblock %}
+                        </div>
+                        
+                        <!-- Explore Section - Container always exists, content is block -->
+                        <div id="explore-section" class="content-section">
+                            {% block explore_content %}
+                            <div class="container mx-auto px-4 py-8">
+                                <div class="text-center">
+                                    <h1 class="text-4xl font-bold text-amber-800 mb-4">Explore</h1>
+                                    <p class="text-xl text-gray-600">Discover restaurants, hotels, and events</p>
+                                </div>
+                            </div>
+                            {% endblock %}
+                        </div>
+                        
+                        {% block additional_sections %}{% endblock %}
+                    </div>
+                    
+                    <!-- Footer Block -->
+                    {% block footer %}
+                    <footer class="bg-amber-900 text-amber-100 mt-auto">
+                        <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+                            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                                <div>
+                                    <h3 class="text-lg font-bold mb-4">About RESTEL</h3>
+                                    <p class="text-amber-200 text-sm">Your perfect destination for restaurant and hotel bookings.</p>
+                                </div>
+                                <div>
+                                    <h3 class="text-lg font-bold mb-4">Quick Links</h3>
+                                    <ul class="space-y-2 text-sm">
+                                        <li><a href="#" class="text-amber-200 hover:text-amber-100">About Us</a></li>
+                                        <li><a href="#" class="text-amber-200 hover:text-amber-100">Terms & Conditions</a></li>
+                                        <li><a href="#" class="text-amber-200 hover:text-amber-100">Privacy Policy</a></li>
+                                        <li><a href="#" class="text-amber-200 hover:text-amber-100">FAQs</a></li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h3 class="text-lg font-bold mb-4">Contact Us</h3>
+                                    <ul class="space-y-2 text-sm text-amber-200">
+                                        <li><i class="fas fa-phone mr-2"></i> +1 234 567 890</li>
+                                        <li><i class="fas fa-envelope mr-2"></i> info@restel.com</li>
+                                        <li><i class="fas fa-map-marker-alt mr-2"></i> 123 Main Street, City</li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h3 class="text-lg font-bold mb-4">Follow Us</h3>
+                                    <div class="flex space-x-4">
+                                        <a href="#" class="text-amber-200 hover:text-amber-100 text-xl"><i class="fab fa-facebook"></i></a>
+                                        <a href="#" class="text-amber-200 hover:text-amber-100 text-xl"><i class="fab fa-instagram"></i></a>
+                                        <a href="#" class="text-amber-200 hover:text-amber-100 text-xl"><i class="fab fa-twitter"></i></a>
+                                        <a href="#" class="text-amber-200 hover:text-amber-100 text-xl"><i class="fab fa-linkedin"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="border-t border-amber-800 mt-8 pt-6 text-center text-sm text-amber-200">
+                                <p>&copy; {% now "Y" %} RESTEL. All rights reserved.</p>
+                            </div>
+                        </div>
+                    </footer>
+                    {% endblock %}
                 </div>
-              </div>
-            </footer>
-          </div>
+            </div>
         </div>
-      </div>
-      <!-- End Main Content Area -->
     </div>
-    <!-- End Flex Container -->
 
-    <!-- JavaScript for Section Switching -->
     <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        // Get all sidebar links
-        const sidebarLinks = document.querySelectorAll(".sidebar-link");
-
-        // Function to switch active section
-        function switchSection(sectionId) {
-          // Hide all sections
-          const allSections = document.querySelectorAll(".content-section");
-          allSections.forEach((section) => {
-            section.classList.remove("active");
-          });
-
-          // Show selected section
-          const selectedSection = document.getElementById(sectionId);
-          if (selectedSection) {
-            selectedSection.classList.add("active");
-          }
-
-          // Update active state in sidebar
-          sidebarLinks.forEach((link) => {
-            link.classList.remove("active");
-            const linkSection = link.getAttribute("data-section");
-            if (linkSection === sectionId.replace("-section", "")) {
-              link.classList.add("active");
+        document.addEventListener("DOMContentLoaded", function () {
+            const sidebarLinks = document.querySelectorAll(".sidebar-link");
+            
+            function switchSection(sectionId) {
+                const allSections = document.querySelectorAll(".content-section");
+                allSections.forEach(section => section.classList.remove("active"));
+                const selectedSection = document.getElementById(sectionId);
+                if (selectedSection) selectedSection.classList.add("active");
+                
+                sidebarLinks.forEach(link => {
+                    link.classList.remove("active");
+                    const linkSection = link.getAttribute("data-section");
+                    if (linkSection === sectionId.replace("-section", "")) {
+                        link.classList.add("active");
+                    }
+                });
+                window.location.hash = sectionId.replace("-section", "");
             }
-          });
-
-          // Update URL hash without scrolling
-          const section = sectionId.replace("-section", "");
-          window.location.hash = section;
-        }
-
-        // Add click handlers to sidebar links
-        sidebarLinks.forEach((link) => {
-          link.addEventListener("click", function (e) {
-            e.preventDefault(); // Prevent default anchor behavior
-
-            const section = this.getAttribute("data-section");
-            if (section === "home") {
-              switchSection("home-section");
-            } else if (section === "explore") {
-              switchSection("explore-section");
-            }
-          });
+            
+            sidebarLinks.forEach(link => {
+                link.addEventListener("click", function (e) {
+                    e.preventDefault();
+                    const section = this.getAttribute("data-section");
+                    if (section === "home") switchSection("home-section");
+                    else if (section === "explore") switchSection("explore-section");
+                });
+            });
+            
+            const hash = window.location.hash.substring(1);
+            if (hash === "home") switchSection("home-section");
+            else if (hash === "explore") switchSection("explore-section");
+            else switchSection("home-section");
+            
+            window.addEventListener("hashchange", function () {
+                const hash = window.location.hash.substring(1);
+                if (hash === "home") switchSection("home-section");
+                else if (hash === "explore") switchSection("explore-section");
+            });
         });
-
-        // Check URL hash on page load to determine active section
-        function checkInitialSection() {
-          const hash = window.location.hash.substring(1); // Remove the # character
-          if (hash === "home") {
-            switchSection("home-section");
-          } else if (hash === "explore") {
-            switchSection("explore-section");
-          } else {
-            // Default to home if no hash or invalid hash
-            switchSection("home-section");
-          }
-        }
-
-        // Run initial section check
-        checkInitialSection();
-
-        // Handle browser back/forward buttons
-        window.addEventListener("hashchange", function () {
-          const hash = window.location.hash.substring(1);
-          if (hash === "home") {
-            switchSection("home-section");
-          } else if (hash === "explore") {
-            switchSection("explore-section");
-          }
-        });
-      });
     </script>
 
     {% block extra_js %}{% endblock %}
-  </body>
+</body>
 </html>

@@ -1,0 +1,425 @@
+{% load static tailwind_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}RESTEL{% endblock %}</title>
+    {% tailwind_css %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gold: #B8860B;
+            --gold-light: #D4A017;
+            --gold-pale: #F5E6C8;
+            --cream: #FAF6EF;
+            --charcoal: #1C1A17;
+            --warm-gray: #6B6560;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background-color: var(--cream);
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        h1, h2, h3, .serif {
+            font-family: 'Cormorant Garamond', serif;
+        }
+
+        /* Animated background grain */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .auth-layout {
+            min-height: 100vh;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+        }
+
+        /* Left panel */
+        .auth-visual {
+            position: relative;
+            background: var(--charcoal);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 3rem;
+        }
+
+        .auth-visual::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse at 20% 80%, rgba(184,134,11,0.25) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 20%, rgba(212,160,23,0.12) 0%, transparent 50%);
+        }
+
+        .auth-visual-bg {
+            position: absolute;
+            inset: 0;
+            background-image: url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=900&q=80');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.35;
+            mix-blend-mode: luminosity;
+        }
+
+        .visual-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .brand-mark {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 3rem;
+        }
+
+        .brand-icon {
+            width: 44px;
+            height: 44px;
+            border: 1.5px solid var(--gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gold);
+            font-size: 1rem;
+        }
+
+        .brand-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.6rem;
+            font-weight: 600;
+            letter-spacing: 0.25em;
+            color: #fff;
+        }
+
+        .visual-tagline {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2rem, 3.5vw, 3.2rem);
+            font-weight: 300;
+            font-style: italic;
+            line-height: 1.25;
+            color: #fff;
+            margin-bottom: 1.25rem;
+        }
+
+        .visual-tagline strong {
+            font-weight: 600;
+            font-style: normal;
+            color: var(--gold-light);
+        }
+
+        .visual-divider {
+            width: 48px;
+            height: 1px;
+            background: var(--gold);
+            margin-bottom: 1.25rem;
+        }
+
+        .visual-sub {
+            font-size: 0.8rem;
+            font-weight: 300;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.5);
+        }
+
+        /* Right panel */
+        .auth-form-panel {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2.5rem 2rem;
+            background: var(--cream);
+            position: relative;
+            z-index: 1;
+        }
+
+        .auth-form-wrap {
+            width: 100%;
+            max-width: 400px;
+        }
+
+        /* Form heading */
+        .form-eyebrow {
+            font-size: 0.7rem;
+            font-weight: 500;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 0.5rem;
+        }
+
+        .form-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.4rem;
+            font-weight: 400;
+            color: var(--charcoal);
+            line-height: 1.1;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-title em {
+            font-style: italic;
+            color: var(--gold);
+        }
+
+        .form-subtitle {
+            font-size: 0.85rem;
+            color: var(--warm-gray);
+            font-weight: 300;
+            margin-bottom: 2.5rem;
+        }
+
+        /* Input fields */
+        .field-group {
+            margin-bottom: 1.25rem;
+        }
+
+        .field-label {
+            display: block;
+            font-size: 0.7rem;
+            font-weight: 500;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--warm-gray);
+            margin-bottom: 0.5rem;
+        }
+
+        .field-wrap {
+            position: relative;
+        }
+
+        .field-icon {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--gold);
+            font-size: 0.8rem;
+            pointer-events: none;
+        }
+
+        .field-input {
+            width: 100%;
+            padding: 0.85rem 1rem 0.85rem 2.6rem;
+            border: 1px solid #DDD5C8;
+            background: #fff;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.9rem;
+            color: var(--charcoal);
+            outline: none;
+            transition: border-color 0.2s, box-shadow 0.2s;
+            border-radius: 2px;
+        }
+
+        .field-input:focus {
+            border-color: var(--gold);
+            box-shadow: 0 0 0 3px rgba(184,134,11,0.08);
+        }
+
+        .field-input::placeholder {
+            color: #BDB5AB;
+        }
+
+        /* Submit button */
+        .btn-primary {
+            width: 100%;
+            padding: 0.9rem 1.5rem;
+            background: var(--charcoal);
+            color: #fff;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            border: none;
+            cursor: pointer;
+            border-radius: 2px;
+            transition: background 0.25s, transform 0.15s;
+            margin-top: 0.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: var(--gold);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.35s cubic-bezier(0.4,0,0.2,1);
+        }
+
+        .btn-primary:hover::after { transform: scaleX(1); }
+        .btn-primary span { position: relative; z-index: 1; }
+
+        /* Divider */
+        .form-divider {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .form-divider::before,
+        .form-divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: #DDD5C8;
+        }
+
+        .form-divider-text {
+            font-size: 0.7rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: #BDB5AB;
+        }
+
+        /* Footer link */
+        .form-footer {
+            text-align: center;
+            font-size: 0.82rem;
+            color: var(--warm-gray);
+            margin-top: 1.5rem;
+        }
+
+        .form-footer a {
+            color: var(--gold);
+            font-weight: 500;
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.2s;
+        }
+
+        .form-footer a:hover {
+            border-color: var(--gold);
+        }
+
+        /* Django form rendered via as_p */
+        .django-form-wrap p {
+            margin-bottom: 1.25rem;
+        }
+
+        .django-form-wrap label {
+            display: block;
+            font-size: 0.7rem;
+            font-weight: 500;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--warm-gray);
+            margin-bottom: 0.5rem;
+        }
+
+        .django-form-wrap input,
+        .django-form-wrap select,
+        .django-form-wrap textarea {
+            width: 100%;
+            padding: 0.85rem 1rem;
+            border: 1px solid #DDD5C8;
+            background: #fff;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.9rem;
+            color: var(--charcoal);
+            outline: none;
+            transition: border-color 0.2s, box-shadow 0.2s;
+            border-radius: 2px;
+        }
+
+        .django-form-wrap input:focus,
+        .django-form-wrap select:focus {
+            border-color: var(--gold);
+            box-shadow: 0 0 0 3px rgba(184,134,11,0.08);
+        }
+
+        .django-form-wrap ul.errorlist {
+            list-style: none;
+            padding: 0;
+            margin: 0.25rem 0 0;
+        }
+
+        .django-form-wrap ul.errorlist li {
+            font-size: 0.75rem;
+            color: #c0392b;
+            letter-spacing: 0;
+            text-transform: none;
+            font-weight: 400;
+        }
+
+        /* Entrance animation */
+        .auth-form-wrap {
+            animation: fadeUp 0.6s cubic-bezier(0.22,1,0.36,1) both;
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Responsive — collapse to single column */
+        @media (max-width: 768px) {
+            .auth-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .auth-visual {
+                min-height: 220px;
+                padding: 2rem;
+                justify-content: center;
+                align-items: flex-start;
+            }
+
+            .visual-tagline {
+                font-size: 1.8rem;
+            }
+
+            .auth-form-panel {
+                padding: 2rem 1.25rem;
+            }
+        }
+    </style>
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    <div class="auth-layout">
+        <!-- Left visual panel -->
+        <div class="auth-visual">
+            <div class="auth-visual-bg"></div>
+            <div class="visual-content">
+                <div class="brand-mark">
+                    <div class="brand-icon"><i class="fas fa-utensils"></i></div>
+                    <span class="brand-name">RESTEL</span>
+                </div>
+                <p class="visual-tagline">Every meal<br>tells a <strong>story.</strong></p>
+                <div class="visual-divider"></div>
+                <p class="visual-sub">Reservations · Dining · Experience</p>
+            </div>
+        </div>
+
+        <!-- Right form panel -->
+        <div class="auth-form-panel">
+            <div class="auth-form-wrap">
+                {% block content %}{% endblock %}
+            </div>
+        </div>
+    </div>
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

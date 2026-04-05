@@ -1,0 +1,58 @@
+{% extends "base_auth.html" %}
+
+{% block title %}Sign In — RESTEL{% endblock %}
+
+{% block content %}
+<div class="form-eyebrow">Member Access</div>
+<h1 class="form-title">Welcome<br><em>back.</em></h1>
+<p class="form-subtitle">Sign in to manage your reservations and dining preferences.</p>
+
+<form method="POST">
+    {% csrf_token %}
+
+    <div class="field-group">
+        <label class="field-label" for="username">Username</label>
+        <div class="field-wrap">
+            <span class="field-icon"><i class="fas fa-user"></i></span>
+            <input
+                class="field-input"
+                type="text"
+                id="username"
+                name="username"
+                placeholder="Your username"
+                required
+                autocomplete="username"
+            >
+        </div>
+    </div>
+
+    <div class="field-group">
+        <label class="field-label" for="password">Password</label>
+        <div class="field-wrap">
+            <span class="field-icon"><i class="fas fa-lock"></i></span>
+            <input
+                class="field-input"
+                type="password"
+                id="password"
+                name="password"
+                placeholder="••••••••"
+                required
+                autocomplete="current-password"
+            >
+        </div>
+    </div>
+
+    <button type="submit" class="btn-primary">
+        <span>Sign In &nbsp;→</span>
+    </button>
+</form>
+
+<div class="form-divider">
+    <span class="form-divider-text">New to RESTEL?</span>
+</div>
+
+<p class="form-footer">
+    Don't have an account?
+    <a href="{% url 'register' %}">Create one here</a>
+</p>
+{% endblock %}

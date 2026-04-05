@@ -1,0 +1,30 @@
+{% extends "base_auth.html" %}
+
+{% block title %}Create Account — RESTEL{% endblock %}
+
+{% block content %}
+<div class="form-eyebrow">Join RESTEL</div>
+<h1 class="form-title">Your table<br><em>awaits.</em></h1>
+<p class="form-subtitle">Create an account to start booking unforgettable dining experiences.</p>
+
+<form method="POST">
+    {% csrf_token %}
+
+    <div class="django-form-wrap">
+        {{ form.as_p }}
+    </div>
+
+    <button type="submit" class="btn-primary">
+        <span>Create Account &nbsp;→</span>
+    </button>
+</form>
+
+<div class="form-divider">
+    <span class="form-divider-text">Already a member?</span>
+</div>
+
+<p class="form-footer">
+    Already have an account?
+    <a href="{% url 'login' %}">Sign in here</a>
+</p>
+{% endblock %}
